@@ -11,7 +11,7 @@ class Usuario(Base):
     nome = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, index=True, nullable=False)
     senha = Column(String(255), nullable=False)
-    role = Column(String(50), default="CLIENTE")  # CLIENTE, ATENDENTE, ADMIN
+    role = Column(String(50), default="CLIENTE") 
     consentimento_lgpd = Column(Boolean, default=False)
 
     # Relacionamento: Um usuário pode ter vários pedidos
@@ -65,9 +65,9 @@ class Pedido(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     usuario_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
     unidade_id = Column(Integer, ForeignKey("unidades.id"), nullable=False)
-    canal_pedido = Column(String(50), nullable=False)  # APP, TOTEM, BALCAO, WEB
-    status = Column(String(50), default="PENDENTE")    # PENDENTE, PAGO, FINALIZADO
-    total = Column(Numeric(10, 2), default=0.0)        # Corrigido para Numeric!
+    canal_pedido = Column(String(50), nullable=False)  
+    status = Column(String(50), default="PENDENTE")    
+    total = Column(Numeric(10, 2), default=0.0)        
     data_pedido = Column(DateTime, default=datetime.utcnow)
 
     # Ligações reversas e sub-itens
@@ -84,7 +84,7 @@ class ItemPedido(Base):
     pedido_id = Column(Integer, ForeignKey("pedidos.id"), nullable=False)
     produto_id = Column(Integer, ForeignKey("produtos.id"), nullable=False)
     quantidade = Column(Integer, nullable=False)
-    preco_unitario = Column(Numeric(10, 2), nullable=False)  # Corrigido para Numeric!
+    preco_unitario = Column(Numeric(10, 2), nullable=False)  
 
     # Ligações reversas
     pedido = relationship("Pedido", back_populates="itens")
